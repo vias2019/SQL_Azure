@@ -1,84 +1,55 @@
-const { Connection, Request } = require("tedious");
-
-// Create connection to database
-const config = {
-  authentication: {
-    options: {
-      userName: "project", // update me
-      password: "tcss*545" // update me
+var Connection = require('tedious').Connection;  
+var config = {  
+    server: 'moviedb.database.windows.net',  //update me
+    authentication: {
+        type: 'default',
+        options: {
+            userName: 'project', //update me
+            password: 'tcss*545'  //update me
+        }
     },
-    type: "default"
-  },
-  server: "tcp:moviedb.database.windows.net", // update me
-  options: {
-    database: "movie", //update me
-    encrypt: true
-  }
-};
-
-/* 
-    //Use Azure VM Managed Identity to connect to the SQL database
-    const config = {
-        server: process.env["db_server"],
-        authentication: {
-            type: 'azure-active-directory-msi-vm',
-        },
-        options: {
-            database: process.env["db_database"],
-            encrypt: true,
-            port: 1433
-        }
-    };
-
-    //Use Azure App Service Managed Identity to connect to the SQL database
-    const config = {
-        server: process.env["db_server"],
-        authentication: {
-            type: 'azure-active-directory-msi-app-service',
-        },
-        options: {
-            database: process.env["db_database"],
-            encrypt: true,
-            port: 1433
-        }
-    });
-
-*/
-
-const connection = new Connection(config);
-
-// Attempt to connect and execute queries if connection goes through
-connection.on("connect", err => {
-  if (err) {
-    console.error(err.message);
-  } else {
-    queryDatabase();
-  }
+    options: {
+        // If you are on Microsoft Azure, you need encryption:
+        encrypt: true,
+        database: 'movie'  //update me
+    }
+};  
+var connection = new Connection(config);  
+connection.on('connect', function(err) {  
+    // If no error, then good to proceed.
+    console.log("Connected");  
 });
 
 connection.connect();
 
-function queryDatabase() {
-  console.log("Reading rows from the Table...");
-
-  // Read all rows from table
-  const request = new Request(
-    `SELECT TOP 5 pc.genre_name
-     FROM [movie].[GENRE] pc`,
-    (err, rowCount) => {
-      if (err) {
-        console.error(err.message);
-      } else {
-        console.log(`${rowCount} row(s) returned`);
-      }
-    }
-  );
-
-  request.on("row", columns => {
-    columns.forEach(column => {
-      console.log("%s\t%s", column.metadata.colName, column.value);
-    });
-  });
-
-  connection.execSql(request);
-}
+var Request = require('tedious').Request;  
+var TYPES = require('tedious').TYPES;  
+  
+    function executeStatement() {  
+        request = new Request("SELECT TOP 5 FROM GENRE;", function(err) {  
+        if (err) {  
+            console.log(err);}  
+        });  
+        var result = "";  
+        request.on('row', function(columns) {  
+            columns.forEach(function(column) {  
+              if (column.value === null) {  
+                console.log('NULL');  
+              } else {  
+                result+= column.value + " ";  
+              }  
+            });  
+            console.log(result);  
+            result ="";  
+        });  
+  
+        request.on('done', function(rowCount, more) {  
+        console.log(rowCount + ' rows returned');  
+        });  
+        
+        // Close the connection after the final event emitted by the request, after the callback passes
+        request.on("requestCompleted", function (rowCount, more) {
+            connection.close();
+        });
+        connection.execSql(request);  
+    }  
