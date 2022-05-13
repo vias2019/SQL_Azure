@@ -1,6 +1,6 @@
 var Connection = require('tedious').Connection;  
 var config = {  
-    server: 'moviedb.database.windows.net',  //update me
+    server: 'tcp:moviedb.database.windows.net',  //update me
     authentication: {
         type: 'default',
         options: {
@@ -26,7 +26,7 @@ var Request = require('tedious').Request;
 var TYPES = require('tedious').TYPES;  
   
     function executeStatement() {  
-        request = new Request("SELECT TOP 5 FROM GENRE;", function(err) {  
+        request = new Request("SELECT * FROM GENRE;", function(err) {  
         if (err) {  
             console.log(err);}  
         });  
