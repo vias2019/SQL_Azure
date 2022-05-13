@@ -32,7 +32,7 @@ function queryDatabase() {
 
   // Read all rows from table
   const request = new Request(
-    `SELECT TOP (20) 
+    `SELECT TOP (5) 
      FROM [movie].[GENRE]`,
     (err, rowCount) => {
       if (err) {
