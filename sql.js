@@ -53,3 +53,4 @@ var TYPES = require('tedious').TYPES;
         });
         connection.execSql(request);  
     }  
+    executeStatement() 
