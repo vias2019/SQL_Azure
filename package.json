@@ -1,0 +1,23 @@
+{
+  "name": "SQL_Azure",
+  "version": "1.0.0",
+  "description": "",
+  "main": "sql.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vias2019/SQL_Azure.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vias2019/SQL_Azure/issues"
+  },
+  "homepage": "https://github.com/vias2019/SQL_Azure#readme",
+  "dependencies": {
+    "tedious": "^14.5.0"
+  }
+}
