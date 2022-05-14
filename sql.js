@@ -27,13 +27,14 @@ connection.on("connect", err => {
   }
 });
 
+connection.connect();
+
 function queryDatabase() {
   console.log("Reading rows from the Table...");
 
   // Read all rows from table
   const request = new Request(
-    `SELECT TOP (5) 
-     FROM GENRE`,
+    `SELECT * FROM RATING`,
     (err, rowCount) => {
       if (err) {
         console.error(err.message);
@@ -51,4 +52,4 @@ function queryDatabase() {
 
   connection.execSql(request);
 }
-queryDatabase()
+//queryDatabase()
