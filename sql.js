@@ -49,9 +49,14 @@ const { findMovieByActor, findMoviesHighRating,
   }
   
   // example to call the function
-  let h = query(findMovieByActor);
+  let queryOnLoad = query(moviesOnLoad);
+  let queryActor = query(findMovieByActor);
+  let queryRating = query(findMoviesHighRating);
+  let queryDuration = query(findMoviesSpecificDuration);
   console.log("print response: ");
-  console.log(h);
+  console.log(queryOnLoad);
+  
+  module.exports = {queryOnLoad, queryActor, queryRating, queryDuration};
 
-  module.exports = {query};
+
   

@@ -1,5 +1,5 @@
 $(document).ready(function () {
-   
+
     var listOfActors = [ //might add more later
         'Eddie Murphy',
         'Oscar Jaenada',
@@ -42,15 +42,15 @@ $(document).ready(function () {
       $('#actor').val("");
     }
   
-    function updateTable() {  //to update
-        let temp = query(moviesOnLoad);
-        for (let i = 0; i < temp.length; i ++)
+    function updateTable() {          //to update
+        console.log(queryOnLoad);
+        for (let i = 0; i < queryOnLoad.length; i ++)
         {
             $('#show-table').append(
             '<tr>' +
-            '<td>' + temp[i][0].value + '</td>' +
-            '<td>' + temp[i][1].value + '</td>' +
-            '<td>' + temp[i][2].value + '</td>' +
+            '<td>' + queryOnLoad[i][0].value + '</td>' +
+            '<td>' + queryOnLoad[i][1].value + '</td>' +
+            '<td>' + queryOnLoad[i][2].value + '</td>' +
             '</tr>'
             );
       }
