@@ -1,55 +1,57 @@
-const { Connection, Request } = require("tedious");
-
-// Create connection to database
-const config = {
-  authentication: {
-    options: {
-      userName: "project", // update me
-      password: "tcss*545" // update me
-    },
-    type: "default"
-  },
-  server: "moviedb.database.windows.net", // update me
-  options: {
-    database: "movie", //update me
-    encrypt: true
-  }
-};
-
-const connection = new Connection(config);
-
-// Attempt to connect and execute queries if connection goes through
-connection.on("connect", err => {
-  if (err) {
-    console.error(err.message);
-  } else {
-    queryDatabase();
-  }
-});
-
-connection.connect();
-
-function queryDatabase() {
-  console.log("Reading rows from the Table...");
-
-  // Read all rows from table
-  const request = new Request(
-    `SELECT * FROM RATING`,
-    (err, rowCount) => {
-      if (err) {
-        console.error(err.message);
-      } else {
-        console.log(`${rowCount} row(s) returned`);
-      }
+const { findMovieByActor, findMoviesHighRating,
+  findMoviesSpecificDuration }  = require('./queries.js');
+  const { Request } = require("tedious");
+  const {connection} = require('./AzureConnection.js');
+  
+  let response = [];
+  function getResponse(query){
+  // Attempt to connect and execute queries if connection goes through
+  connection.on("connect", err => {
+    if (err) {
+      console.error(err.message);
+    } else {
+      queryDatabase(query);
     }
-  );
-
-  request.on("row", columns => {
-    columns.forEach(column => {
-      console.log("%s\t%s", column.metadata.colName, column.value);
-    });
   });
+  }
+  
+  connection.connect();
+  
+  function queryDatabase(query) {
+    console.log("Reading rows from the Table...");
+    
+    // Read all rows from table
+    const request = new Request(
+      // `SELECT * FROM RATING`,
+      query,
+      (err, rowCount) => {
+        if (err) {
+          console.error(err.message);
+        } else {
+          console.log(`${rowCount} row(s) returned`);
+        }
+      }
+    );
+  
+    request.on(
+      "row", columns => {
+      response.push(columns);
+      columns.forEach(column => {
+        console.log("%s\t%s", column.metadata.colName, column.value);
+      });
+    });
+    connection.execSql(request);
+  }
+  
+  function query(qry){
+    getResponse(qry);
+    return response;
+  }
+  
+  // example to call the function
+  // let h = query(findMovieByActor);
+  // console.log("print response: ");
+  // console.log(h);
 
-  connection.execSql(request);
-}
-//queryDatabase()
+  module.exports = {query};
+  
