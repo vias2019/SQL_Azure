@@ -1,5 +1,5 @@
 const { findMovieByActor, findMoviesHighRating,
-  findMoviesSpecificDuration }  = require('./queries.js');
+  findMoviesSpecificDuration, moviesOnLoad }  = require('./queries.js');
   const { Request } = require("tedious");
   const {connection} = require('./AzureConnection.js');
   
@@ -49,9 +49,9 @@ const { findMovieByActor, findMoviesHighRating,
   }
   
   // example to call the function
-  // let h = query(findMovieByActor);
-  // console.log("print response: ");
-  // console.log(h);
+  let h = query(findMovieByActor);
+  console.log("print response: ");
+  console.log(h);
 
   module.exports = {query};
   

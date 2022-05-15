@@ -16,6 +16,15 @@ select actor_id
 from ACTOR
 where actor_name = 'Eddie Murphy'
 
+--select movies, duration, and rating for the load
+select m.movie_title, m.movie_duration, r.rating_type
+from MOVIE as m
+join MOVIE_CAST as c on m.movie_id = c.movie_id
+join MOVIE_RATING as mr on m.movie_id = mr.movie_id
+join RATING as r on mr.rating_id = r.rating_id
+group by m.movie_title, m.movie_duration, r.rating_type
+order by m.movie_title
+
 --select movies with Eddie Murphy
 select m.movie_title, m.movie_duration, r.rating_type
 from MOVIE as m

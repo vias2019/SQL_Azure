@@ -1,5 +1,5 @@
 $(document).ready(function () {
-
+   
     var listOfActors = [ //might add more later
         'Eddie Murphy',
         'Oscar Jaenada',
@@ -43,15 +43,17 @@ $(document).ready(function () {
     }
   
     function updateTable() {  //to update
-      database.ref('/trains').on("child_added", function (snapshot) {
-
-        $('#show-table').append(
-          '<tr>' +
-          '<td>' + snapshot.val().trainName + '</td>' +
-          '<td>' + snapshot.val().actor + '</td>' +
-          '</tr>'
-        );
-      });
+        let temp = query(moviesOnLoad);
+        for (let i = 0; i < temp.length; i ++)
+        {
+            $('#show-table').append(
+            '<tr>' +
+            '<td>' + temp[i][0].value + '</td>' +
+            '<td>' + temp[i][1].value + '</td>' +
+            '<td>' + temp[i][2].value + '</td>' +
+            '</tr>'
+            );
+      }
     }
     updateTable();
   
