@@ -1,3 +1,4 @@
+--This sql file created tables for Azure DB
 CREATE DATABASE movie;
 USE movie;
 

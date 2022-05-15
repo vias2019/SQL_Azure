@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Movie</title>
+    <link rel="stylesheet" href="reset.css">
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js" integrity="sha256-4iQZ6BVL4qNKlQ27TExEhBN1HFPvAvAMbFavKKosSWQ=" crossorigin="anonymous"></script>
+    <script src="./front.js"></script>
+</head>
+
+<body>
+
+    <div class="jumbo">
+        <div class="container">
+            <h1 class="display-4">Movies</h1>
+        </div>
+    </div>
+
+    <form class="pure-form">
+        <fieldset>
+            <!-- <legend></legend> -->
+            <label for="name"><b>Select a Query</b> <br> </label>
+            <select id="query_id" placeholder="Select Query">
+                <option id="option" value ="Eddie Murphy"></option>
+              </select><br> <br>
+            <label for="name"><b>Select an Actor</b> <br> </label>
+            <select id="actor" placeholder="Select Actor">
+                <option id="option" value ="Eddie Murphy"></option>
+              </select>
+            <br> <br>
+            
+            <button id='search' type="submit" class="pure-button pure-button-primary">Submit</button>
+            <button id='clearSearch' type="submit" class="pure-button pure-button-primary">Clear Results</button>
+        </fieldset>
+    </form>
+    <br>
+    <br>
+    <table class="table">
+        <thead class="movie-table">
+            <tr>
+                <th scope="col">Movie name</th>
+                <th scope="col">Duration, min</th>
+                <th scope="col">Rating</th>
+            </tr>
+        </thead>
+        <tbody id='show-table'>
+        </tbody>
+    </table>
+
+</body>
+
+</html>

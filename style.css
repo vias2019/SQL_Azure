@@ -1,0 +1,37 @@
+input {
+    max-width: 100%;
+
+}
+legend {
+    max-width: 100%;
+}
+.container {
+    text-align: center;
+}
+body {
+    margin: 15px;
+    background-image: url("./images/cinema.jpg");
+    background-position: center; 
+    font-weight: bold;
+}
+
+.display-4{
+    font-weight: bold;
+}
+.lead {
+    font-weight: bold;
+}
+.movie-table {
+    font-size: 25px;
+}
+tbody {
+    font-size: 20px;
+}
+
+.movie-table,
+.table thead th, 
+.table td, 
+.table th,
+.table tr {
+    border: 1px solid rgb(66, 63, 63);
+} 

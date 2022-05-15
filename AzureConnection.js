@@ -1,6 +1,6 @@
 const { Connection } = require("tedious");
 
-// Create connection to database
+// Create connection to the Azure database
 const config = {
   authentication: {
     options: {
