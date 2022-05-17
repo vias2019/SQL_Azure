@@ -12,45 +12,69 @@ $(document).ready(function () {
         'Rosamund Pike'
     ];
   
-    var listOfQueries = [
-        'Find Movie by Actor',
-        'Find Movie by Rating',
-        'Find Movie Specific Duration'
+    var listOfGenre = [
+        'Comedies',
+        'Horror Movies',
+        'Thrillers',
+        'Action & Adventure',
+        'Dramas',
+        'Children & Family Movies',
+        'Classic Movies',
+        'Documentaries',
+        'Stand-Up Comedy',
+        'Cult Movies'
+    ];
+
+    var listOfRating = [
+        'PG-13',
+        'PG',
+        'R',
+        'G'
     ];
 
     function dropDownActors() {
       listOfActors.sort();
       for (var i = 0; i < listOfActors.length; i++) {
-        var addActor = $("<option>");
-        addActor.text(listOfActors[i]);
-        $("#actor").append(addActor);
+        var actor = $("<option>");
+        actor.text(listOfActors[i]);
+        $("#actor_id").append(actor);
       }
     }
     dropDownActors();
 
-    function dropDownQuery() {
-        for (var i = 0; i < listOfQueries.length; i++) {
-          var addQuery = $("<option>");
-          addQuery.text(listOfQueries[i]);
-          $("#query_id").append(addQuery);
+    function dropDownGenre() {
+        for (var i = 0; i < listOfGenre.length; i++) {
+          var genre = $("<option>");
+          genre.text(listOfGenre[i]);
+          $("#genre_id").append(genre);
         }
       }
-    dropDownQuery();
+    dropDownGenre();
+
+    function dropDownRating() {
+      for (var i = 0; i < listOfRating.length; i++) {
+        var rating = $("<option>");
+        rating.text(listOfRating[i]);
+        $("#rating_id").append(rating);
+      }
+    }
+  dropDownRating();
   
     function clear() {
-      $('#query_id').val("");
-      $('#actor').val("");
+      $('#genre_id').val("");
+      $('#actor_id').val("");
+      $('#rating_id').val("");
     }
   
     function updateTable() {          //to update
-        console.log(queryOnLoad);
-        for (let i = 0; i < queryOnLoad.length; i ++)
+        let temp = query(1);
+        for (let i = 0; i < temp.length; i ++)
         {
             $('#show-table').append(
             '<tr>' +
-            '<td>' + queryOnLoad[i][0].value + '</td>' +
-            '<td>' + queryOnLoad[i][1].value + '</td>' +
-            '<td>' + queryOnLoad[i][2].value + '</td>' +
+            '<td>' + temp[i][0].value + '</td>' +
+            '<td>' + temp[i][1].value + '</td>' +
+            '<td>' + temp[i][2].value + '</td>' +
             '</tr>'
             );
       }
@@ -65,8 +89,8 @@ $(document).ready(function () {
       event.preventDefault();
       console.log('clicked');
       var newObjectForNewTrain = {
-        query: $('#query_id').val(),
-        actor: $('#actor').val(),
+        query: $('#genre_id').val(),
+        actor: $('#actor_id').val(),
       };
       trainscheduler.push(newObjectForNewTrain);
     });
