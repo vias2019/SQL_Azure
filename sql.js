@@ -4,26 +4,26 @@ const { findMovieByActor, findMoviesHighRating,
   const {connection} = require('./AzureConnection.js');
   
   let response = [];
-  function getResponse(query){
+  function getResponse(qry){
   // Attempt to connect and execute queries if connection goes through
   connection.on("connect", err => {
     if (err) {
       console.error(err.message);
     } else {
-      queryDatabase(query);
+      queryDatabase(qry);
     }
   });
   }
   
   connection.connect();
   
-  function queryDatabase(query) {
+  function queryDatabase(qry) {
     console.log("Reading rows from the Table...");
     
     // Read all rows from table
     const request = new Request(
       // `SELECT * FROM RATING`,
-      query,
+      qry,
       (err, rowCount) => {
         if (err) {
           console.error(err.message);
@@ -49,14 +49,15 @@ const { findMovieByActor, findMoviesHighRating,
   }
   
   // example to call the function
-  let queryOnLoad = query(moviesOnLoad);
-  let queryActor = query(findMovieByActor);
-  let queryRating = query(findMoviesHighRating);
+  // let queryOnLoad = query(moviesOnLoad);
+  // let queryActor = query(findMovieByActor);
+  // let queryRating = query(findMoviesHighRating);
   let queryDuration = query(findMoviesSpecificDuration);
   console.log("print response: ");
-  console.log(queryOnLoad);
-  
-  module.exports = {queryOnLoad, queryActor, queryRating, queryDuration};
+  console.log(queryDuration);
+
+
+  // module.exports = {queryOnLoad, queryActor, queryRating, queryDuration};
 
 
   
