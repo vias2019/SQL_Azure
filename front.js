@@ -88,10 +88,5 @@ $(document).ready(function () {
     $("#search").on("click", function (event) { // to update
       event.preventDefault();
       console.log('clicked');
-      var newObjectForNewTrain = {
-        query: $('#genre_id').val(),
-        actor: $('#actor_id').val(),
-      };
-      trainscheduler.push(newObjectForNewTrain);
     });
   });
